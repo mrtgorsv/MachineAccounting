@@ -20,6 +20,19 @@ namespace MachineAccounting.Web.Heplers
             CreateMap<MachineType, SelectListItem>()
                 .ForMember(s => s.Value, cfg => cfg.MapFrom(st => st.Id.ToString()))
                 .ForMember(s => s.Text, cfg => cfg.MapFrom(st => st.Name));
+
+            CreateMap<MachineOrder, MachineOrderViewModel>()
+                .ForMember(s => s.MachineName, cfg => cfg.MapFrom(st => st.Machine.Name));
+            CreateMap<Machine, MachineOrderViewModel>()
+                .ForMember(s => s.OrderId, cfg => cfg.Ignore())
+                .ForMember(s => s.MachineName, cfg => cfg.MapFrom(st => st.Name))
+                .ForMember(s => s.Amount, cfg => cfg.Ignore())
+                .ForMember(s => s.Rest, cfg => cfg.MapFrom(st => st.Rest))
+                .ForMember(s => s.MachineId, cfg => cfg.MapFrom(st => st.Id));
+            CreateMap<MachineOrderViewModel, MachineOrder>()
+                .ForMember(s => s.Machine, cfg => cfg.Ignore())
+                .ForMember(s => s.Order, cfg => cfg.Ignore())
+                .ForMember(s => s.Count, cfg => cfg.MapFrom(mo => mo.Amount));
         }
     }
 }

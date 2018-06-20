@@ -13,6 +13,8 @@ namespace MachineAccounting.DataContext.Models
 
         public string Currency { get; set; }
 
+        public bool Deleted { get; set; }
+
         [ForeignKey(nameof(MachineType))]
         public int MachineTypeId { get; set; }
 

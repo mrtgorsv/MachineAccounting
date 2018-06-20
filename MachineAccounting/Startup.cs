@@ -25,6 +25,7 @@ namespace MachineAccounting.Web
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<IMachineService , MachineService>();
+            services.AddScoped<IMachineOrderService , MachineOrderService>();
 
 
             services.AddAutoMapper();

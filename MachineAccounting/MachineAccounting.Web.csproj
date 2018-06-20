@@ -20,4 +20,10 @@
     <ProjectReference Include="..\MachineAccounting.Infrastructure\MachineAccounting.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Views\Machine\Buy.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+
 </Project>

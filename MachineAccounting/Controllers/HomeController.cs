@@ -8,7 +8,7 @@ namespace MachineAccounting.Web.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index" , "Machine");
         }
 
         public IActionResult About()

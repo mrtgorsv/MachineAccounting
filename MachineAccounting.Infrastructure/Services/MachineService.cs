@@ -51,6 +51,7 @@ namespace MachineAccounting.Infrastructure.Services
             return _context.Machines
                 .Include(m => m.MachineType)
                 .Include(m => m.Storage)
+                .Where(m => !m.Deleted)
                 .ToList();
         }
 
@@ -59,6 +60,7 @@ namespace MachineAccounting.Infrastructure.Services
             return await _context.Machines
                 .Include(m => m.MachineType)
                 .Include(m => m.Storage)
+                .Where(m => !m.Deleted)
                 .ToListAsync();
         }
 
@@ -92,15 +94,15 @@ namespace MachineAccounting.Infrastructure.Services
 
         public bool Delete(Machine entity)
         {
-            _context.Machines.Remove(entity);
-            _context.SaveChanges();
+            entity.Deleted = true;
+            Update(entity);
             return true;
         }
 
         public async Task<bool> DeleteAsync(Machine entity)
         {
-            _context.Machines.Remove(entity);
-            await _context.SaveChangesAsync();
+            entity.Deleted = true;
+            await UpdateAsync(entity);
             return true;
         }
 

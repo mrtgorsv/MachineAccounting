@@ -7,10 +7,17 @@ namespace MachineAccounting.Web.Models
     public class MachineEditViewModel
     {
         public int Id { get; set; }
+
+        [Display(Name = "Наименование")]
         public string Name { get; set; }
+
+        [Display(Name = "Цена")]
         public int Price { get; set; }
+
+        [Display(Name = "Остаток")]
         public int Rest { get; set; }
 
+        [Display(Name = "Валюта")]
         public string Currency { get; set; }
 
         [Display(Name = "Тип оборудования")]

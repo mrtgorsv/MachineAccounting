@@ -11,16 +11,18 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace MachineAccounting.Web.Controllers
 {
-    [Route("api/machine")]
+    [Route("machine")]
     public class MachineController : Controller
     {
         private readonly IMachineService _machineService;
+        private readonly IMachineOrderService _machineOrderService;
         private readonly IMapper _mapper;
 
-        public MachineController(IMachineService service, IMapper mapper)
+        public MachineController(IMachineService service, IMapper mapper, IMachineOrderService machineOrderService)
         {
             _machineService = service;
             _mapper = mapper;
+            _machineOrderService = machineOrderService;
         }
 
         // GET: api/Machine
@@ -39,6 +41,7 @@ namespace MachineAccounting.Web.Controllers
             {
                 return BadRequest(ModelState);
             }
+
             var machine = await _machineService.GetAsync(id);
 
             if (machine == null)
@@ -65,6 +68,7 @@ namespace MachineAccounting.Web.Controllers
             {
                 return BadRequest();
             }
+
             try
             {
                 await _machineService.UpdateAsync(_mapper.Map<Machine>(machine));
@@ -75,6 +79,7 @@ namespace MachineAccounting.Web.Controllers
                 {
                     return NotFound();
                 }
+
                 throw;
             }
 
@@ -98,13 +103,14 @@ namespace MachineAccounting.Web.Controllers
             {
                 return BadRequest(ModelState);
             }
+
             await _machineService.CreateAsync(_mapper.Map<Machine>(machine));
 
             return RedirectToAction(nameof(Index));
         }
 
         // DELETE: api/Machine/5
-        [HttpDelete("{id}")]
+        [HttpGet("/delete/{id}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
             if (!ModelState.IsValid)
@@ -117,7 +123,33 @@ namespace MachineAccounting.Web.Controllers
             {
                 return NotFound();
             }
+
             await _machineService.DeleteAsync(machine);
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet("/buy/{id}")]
+        public async Task<IActionResult> Buy([FromRoute] int id)
+        {
+            var machine = await _machineService.GetAsync(id);
+            var machineViewModel = _mapper.Map<MachineOrderViewModel>(machine);
+            machineViewModel.Rest = machine.Rest;
+            machineViewModel.MachineName = machine.Name;
+            machineViewModel.MachineId = machine.Id;
+            return View(machineViewModel);
+        }
+
+        [HttpPost("/buy/{id}")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Buy([FromRoute] int id, [FromForm] MachineOrderViewModel machine)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            await _machineOrderService.CreateAsync(_mapper.Map<MachineOrder>(machine));
 
             return RedirectToAction(nameof(Index));
         }

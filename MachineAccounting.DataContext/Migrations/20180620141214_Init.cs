@@ -8,13 +8,27 @@ namespace MachineAccounting.DataContext.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Order",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    OrderType = table.Column<int>(nullable: false),
+                    Description = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Order", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Section",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Description = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -27,8 +41,8 @@ namespace MachineAccounting.DataContext.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Adress = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: true),
+                    Adress = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -68,11 +82,11 @@ namespace MachineAccounting.DataContext.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Currency = table.Column<string>(nullable: true),
-                    MachineTypeId = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     Price = table.Column<int>(nullable: false),
                     Rest = table.Column<int>(nullable: false),
+                    Currency = table.Column<string>(nullable: true),
+                    MachineTypeId = table.Column<int>(nullable: false),
                     StorageId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -93,29 +107,30 @@ namespace MachineAccounting.DataContext.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Request",
+                name: "MachineOrder",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Description = table.Column<string>(nullable: true),
+                    Price = table.Column<int>(nullable: false),
                     Count = table.Column<int>(nullable: false),
                     MachineId = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    StorageId = table.Column<int>(nullable: false)
+                    OrderId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Request", x => x.Id);
+                    table.PrimaryKey("PK_MachineOrder", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Request_Machine_MachineId",
+                        name: "FK_MachineOrder_Machine_MachineId",
                         column: x => x.MachineId,
                         principalTable: "Machine",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
-                        name: "FK_Request_Storage_StorageId",
-                        column: x => x.StorageId,
-                        principalTable: "Storage",
+                        name: "FK_MachineOrder_Order_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Order",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.NoAction);
                 });
@@ -131,6 +146,16 @@ namespace MachineAccounting.DataContext.Migrations
                 column: "StorageId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_MachineOrder_MachineId",
+                table: "MachineOrder",
+                column: "MachineId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MachineOrder_OrderId",
+                table: "MachineOrder",
+                column: "OrderId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_MachineType_SectionId",
                 table: "MachineType",
                 column: "SectionId");
@@ -139,25 +164,18 @@ namespace MachineAccounting.DataContext.Migrations
                 name: "IX_MachineType_StorageId",
                 table: "MachineType",
                 column: "StorageId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Request_MachineId",
-                table: "Request",
-                column: "MachineId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Request_StorageId",
-                table: "Request",
-                column: "StorageId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Request");
+                name: "MachineOrder");
 
             migrationBuilder.DropTable(
                 name: "Machine");
+
+            migrationBuilder.DropTable(
+                name: "Order");
 
             migrationBuilder.DropTable(
                 name: "MachineType");

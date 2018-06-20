@@ -1,0 +1,50 @@
+﻿@model MachineAccounting.Web.Models.MachineOrderViewModel
+
+@{
+    ViewData["Title"] = "Купить";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewData["Title"]</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Buy" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="MachineName" class="control-label"></label>
+                <input asp-for="MachineName" class="form-control" readonly="readonly" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" readonly="readonly" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Rest" class="control-label"></label>
+                <input asp-for="Rest" class="form-control" readonly="readonly" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Amount" class="control-label"></label>
+                <input asp-for="Amount" class="form-control" />
+                <span asp-validation-for="Rest" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Currency" class="control-label"></label>
+                <input asp-for="Currency" class="form-control" readonly="readonly" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Купить" class="btn btn-default" />
+            </div>
+            @Html.HiddenFor(m => m.MachineId)
+            @Html.HiddenFor(m => m.OrderId)
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Вернуться к списку</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

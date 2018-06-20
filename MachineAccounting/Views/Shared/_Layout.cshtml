@@ -3,17 +3,19 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - MachineAccounting</title>
+    <title>@ViewData["Title"] - КИП Сервис</title>
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/css/fontawesome-all.min.css"/>
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/fontawesome-all.min.css" asp-append-version="true" />
     </environment>
 </head>
 <body>
@@ -26,11 +28,10 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">MachineAccounting</a>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">КИП Сервис</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Домашняя страница</a></li>
                     <li><a asp-area="" asp-controller="Machine" asp-action="Index">Оборудование</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Контакты</a></li>
                 </ul>
@@ -39,9 +40,9 @@
     </nav>
     <div class="container body-content">
         @RenderBody()
-        <hr />
+        <hr/>
         <footer>
-            <p>&copy; 2018 - MachineAccounting</p>
+            <p>&copy; 2018 - КИП Сервис</p>
         </footer>
     </div>
 
