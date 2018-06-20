@@ -1,6 +1,4 @@
-using System;
-
-namespace MachineAccounting.Models
+namespace MachineAccounting.Web.Models
 {
     public class ErrorViewModel
     {

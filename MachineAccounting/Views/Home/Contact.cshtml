@@ -1,17 +1,73 @@
 ﻿@{
-    ViewData["Title"] = "Contact";
+    ViewData["Title"] = "Контакты";
 }
-<h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+<div class="contacts">
+    <address>
+        <div class="container" style="opacity: 1;">
+            <div class="blockContacts row">
+                <div class="col-sm-4 col-xs-12">
+                    <div class="item">
+                        <div class="info">
+                            <span>Отдел продаж:</span><br>
+                            <a href="mailto:info@kip-group.com">info@kip-group.com</a><br>
+                            <a href="tel:88007707585" class="phone">8 800 770-75-85</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-xs-12">
+                    <div class="item">
+                        <div class="info">
+                            <span>Отдел кадров:</span><br>
+                            <a href="mailto:personal@kip-group.com">personal@kip-group.com</a><br>
+                            <a href="tel:+78432671302" class="phone">+7 843 267-13-02</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-xs-12">
+                    <div class="item">
+                        <div class="info">
+                            <span>Техподдержка:</span><br>
+                            <a href="mailto:tech@kip-group.com">tech@kip-group.com</a><br>
+                            <a href="tel:88007009882" class="phone">8 800 700-98-82</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </address>
+    <address>
+        <div class="container" style="opacity: 1;">
+            <div class="contactBlock2 pt60">
+                <div class="contactBlock2__left">
 
-<address>
-    <strong>Support:</strong> <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+                    <div class="phone-bock1">
+                        <div class="phone-bock1__title">Бесплатный звонок по России:</div>
+                        <div class="phone-bock1__number">
+                            <a href="tel:88007707585">8-800-770-75-70</a>
+                        </div>
+                    </div>
+
+                    <div class="phone-bock1">
+                        <div class="phone-bock1__title">Центральный офис:</div>
+                        <div class="phone-bock1__number">
+                            <a href="tel:+78432100310">+7-843-210-03-10</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="contactBlock2__right">
+                    <div class="phone-bock1">
+                        <div class="phone-bock2__item phone-bock2__item--whatsapp">
+                            <a href="whatsapp://send?text=+79600454340">+7-960-045-43-40</a>
+                        </div>
+                        <div class="phone-bock2__item phone-bock2__item--viber">
+                            <a href="viber://tel:+79600454340">+7-960-045-43-40</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </address>
+
+</div>

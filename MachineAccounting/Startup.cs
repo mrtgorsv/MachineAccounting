@@ -1,4 +1,6 @@
-﻿using MachineAccounting.DataContext;
+﻿using AutoMapper;
+using MachineAccounting.DataContext;
+using MachineAccounting.Infrastructure.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +23,11 @@ namespace MachineAccounting.Web
         {
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<IMachineService , MachineService>();
+
+
+            services.AddAutoMapper();
             services.AddMvc();
         }
 

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
+using MachineAccounting.Web.Models;
 using Microsoft.AspNetCore.Mvc;
-using MachineAccounting.Models;
 
-namespace MachineAccounting.Controllers
+namespace MachineAccounting.Web.Controllers
 {
     public class HomeController : Controller
     {
